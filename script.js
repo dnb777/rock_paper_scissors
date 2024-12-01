@@ -1,5 +1,8 @@
 // ROCK, PAPER OR SCISSORS
 
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
     let random = Math.floor(Math.random() * 3);
 
