@@ -42,3 +42,15 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+
+function playGame() {
+    humanScore = 0;
+    computerScore = 0;
+
+    for (let i = 0; i < 5; i++){
+        console.log(`Round: ${i + 1}`);
+        playRound(getHumanChoice(), getComputerChoice());
+    }
+}
+
+playGame();
