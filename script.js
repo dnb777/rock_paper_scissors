@@ -20,10 +20,25 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let choice = prompt("Elige: piedra, papel o tijeras").toLowerCase();
-    if (choice != "piedra" && choice != "papel" && choice != "tijeras") {
-        alert("Opcion no valida");
+    let choice = prompt("Choose: rock, paper o scissors").toLowerCase();
+    if (choice != "rock" && choice != "paper" && choice != "scissors") {
+        alert("invalid choice");
     } else {
         return choice;
     }
 }
+
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice == "rock" && computerChoice == "scissors" ||
+        humanChoice == "paper" && computerChoice == "rock" ||
+        humanChoice == "scissors" && computerChoice == "paper") {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        humanScore++;
+    } else if (humanChoice == computerChoice) {
+        console.log(`It's a tie, both pick ${humanChoice}`);
+    } else {
+        console.log (`You lose, ${computerChoice} beats ${humanChoice}`)
+        computerScore++;
+    }
+}
+
