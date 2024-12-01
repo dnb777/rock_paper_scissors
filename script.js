@@ -15,3 +15,12 @@ function getComputerChoice() {
             break;
     }
 }
+
+function getHumanChoice() {
+    let choice = prompt("Elige: piedra, papel o tijeras").toLowerCase();
+    if (choice != "piedra" && choice != "papel" && choice != "tijeras") {
+        alert("Opcion no valida");
+    } else {
+        return choice;
+    }
+}
