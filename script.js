@@ -2,55 +2,65 @@
 
 let humanScore = 0;
 let computerScore = 0;
+const btnRock = document.querySelector("#rock");
+const btnPaper = document.querySelector("#paper");
+const btnScissors = document.querySelector("#scissors");
+const btnContainer = document.querySelector('#btn-container');
+const results = document.querySelector("#results");
+
+const roundResult = document.createElement("p");
+results.appendChild(roundResult);
+
+const scoreDisplay = document.createElement("p");
+scoreDisplay.textContent = `Player: ${humanScore} \n PC: ${computerScore}`;
+results.appendChild(scoreDisplay);
+
+
+
 
 function getComputerChoice() {
-    let random = Math.floor(Math.random() * 3);
-
-    switch(random){
-        case 0:
-            return "rock";
-            break;
-        case 1:
-            return "paper";
-            break;
-        case 2:
-            return "scissors";
-            break;
-    }
-}
-
-function getHumanChoice() {
-    let choice = prompt("Choose: rock, paper o scissors").toLowerCase();
-    if (choice != "rock" && choice != "paper" && choice != "scissors") {
-        alert("invalid choice");
-    } else {
-        return choice;
-    }
+    const choices = ['rock', 'paper', 'scissors'];
+    return choices[Math.floor(Math.random() * choices.length)];
 }
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice == "rock" && computerChoice == "scissors" ||
         humanChoice == "paper" && computerChoice == "rock" ||
         humanChoice == "scissors" && computerChoice == "paper") {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        roundResult.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
         humanScore++;
     } else if (humanChoice == computerChoice) {
-        console.log(`It's a tie, both pick ${humanChoice}`);
+        roundResult.textContent = `It's a tie, both pick ${humanChoice}`;
     } else {
-        console.log (`You lose, ${computerChoice} beats ${humanChoice}`)
+        roundResult.textContent = `You lose, ${computerChoice} beats ${humanChoice}`;
         computerScore++;
     }
+    displayScore();
 }
 
 
-function playGame() {
+btnContainer.addEventListener('click', (e) => {
+    let target = e.target;
+
+    playRound(e.target.id, getComputerChoice());
+})
+
+
+
+
+function displayScore(){
+    if (humanScore == 5) {
+    scoreDisplay.textContent = `Final score Player: ${humanScore} PC:${computerScore}`;
+    scoreRestart();
+   } else if (computerScore == 5) {
+    scoreDisplay.textContent = `Final score Player:${humanScore} PC:${computerScore}`;
+    scoreRestart();
+   } else {
+    scoreDisplay.textContent = `Player:${humanScore} \n PC:${computerScore}`;
+   }
+}
+
+function scoreRestart() {
     humanScore = 0;
     computerScore = 0;
-
-    for (let i = 0; i < 5; i++){
-        console.log(`Round: ${i + 1}`);
-        playRound(getHumanChoice(), getComputerChoice());
-    }
 }
-
-playGame();
